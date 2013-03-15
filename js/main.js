@@ -94,7 +94,7 @@ window.addEventListener("DOMContentLoaded", function () {
 	       var makeLi = document.createElement("li");
 	       if (i%2 === 0) {
 	           makeLi.setAttribute("class", "altcolor");
-	       }
+	       } 
 	       makeList.appendChild(makeLi);
 	       var key = localStorage.key(i);
 	       var useless = localStorage.getItem(key);
@@ -109,8 +109,8 @@ window.addEventListener("DOMContentLoaded", function () {
 	         
 	       }
 	        var linksLi = document.createElement("li");
-	         makeNextList.appendChild(linksLi);
-	       makeItemControls(key, linksLi);
+	        makeNextList.appendChild(linksLi);
+	        makeItemControls(key, linksLi);
 	    }
 		switchView("1");
 		
@@ -137,12 +137,19 @@ window.addEventListener("DOMContentLoaded", function () {
 	}
 	
 	//add to local storage
-	function storeData () {
+	function storeData (key) {
 		getMarked();
 		/* i have never been one to use a random number for a key without having a letter or something
 		 at the front, which is why my key starts with a k. personal preference maybe, not sure but it 
 		 makes more sense to me */
+		 
+		if ($("submit").value == "Submit bike"){
 		var uid = "k" + Math.floor(Math.random()*123456);
+		
+		} else {
+			uid = key;
+			console.log(uid);
+		}
 		var bike = {};
 		    bike.assembler = ["Assembler: ", $("assembler").value];
 		    bike.date = ["Date: ", $("assdate").value];
@@ -194,10 +201,16 @@ window.addEventListener("DOMContentLoaded", function () {
 	}
 	
 	
-	function checkBike () {
+	function checkBike (e) {
+	
 		var getAssembler = $("assembler");
 		var getDate = $("assdate");
 		var getType = $("biketype")
+		
+		eMsg.innerHTML = "";
+		getType.style.border = "1px solid black";
+		getAssembler.style.border = "1px solid black";
+		getDate.style.border = "1px solid black";
 		
 		var errorMsgs = [];
 		
@@ -223,27 +236,21 @@ window.addEventListener("DOMContentLoaded", function () {
 			var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;			
 		*/
 		
+		if (errorMsgs.length>=1) {
+			for (i=0, j=errorMsgs.length; i<j; i++) {
+				var txt = document.createElement("li");
+				txt.innerHTML = errorMsgs[i];
+				eMsg.appendChild(txt);
+			}
+			e.preventDefault();
+			return false;
+		} else {
+			$("bikes").innerHTML = "";
+			storeData(this.key);
+		}
 		
-		
-		/*
-			bike.assembler = ["Assembler: ", $("assembler").value];
-		    bike.date = ["Date: ", $("assdate").value];
-		    bike.type = ["Type: ", $("biketype").value];
-		    bike.marked = ["Marked: ", markedVal];
-		    bike.time = ["Time: ", $("asstime").value];
-		    bike.comments = ["Comments: ", $("comments").value];
-*/
+	}
 
-		
-	}
-	/*
-function removeBike (k) {
-		
-		localStorage.removeItem(k);
-		var liPoof = document.getElementById(k);
-		liPoof.parentNode.removeChild(liPoof);
-	}
-*/
 	// variables & run functions
 	
 	/* i'm not really sure why we are doing the select portion dynamically, as if changes needed to be made
@@ -258,6 +265,7 @@ function removeBike (k) {
 	];
 	
 	var markedVal;
+	var eMsg = $("errors");
 	popType();
 	
 	
