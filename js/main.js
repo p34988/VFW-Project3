@@ -184,20 +184,56 @@ window.addEventListener("DOMContentLoaded", function () {
 		$("submit").value = "Edit Bike";
 		var eSubmit = $("submit");
 		eSubmit.addEventListener("click", checkBike);
-		
+		eSubmit.key = this.key;
 	}
 	
 	//delete item
 	function deleteItem () {
 		
-		console.log("test");
-		
+				
 	}
 	
 	
 	function checkBike () {
+		var getAssembler = $("assembler");
+		var getDate = $("assdate");
+		var getType = $("biketype")
+		
+		var errorMsgs = [];
+		
+		if (getType.value === "--Select Bike Type--") {
+			var typeError = "Please choose a bike type.";
+			getType.style.border = "1px solid red";
+			errorMsgs.push(typeError);
+		}
+		
+		if (getAssembler.value === "") {
+			var assError = "Please enter Assemblers name."
+			getAssembler.style.border = "1px solid red";
+			errorMsgs.push(assError);
+			
+		}
+		if (getDate.value === "") {
+			var dateError = "Please enter a date."
+			getDate.style.border = "1px solid red";
+			errorMsgs.push(dateError);
+			
+		}
+		/*I don't have an email field but for practice, adding the line from the video
+			var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;			
+		*/
 		
 		
+		
+		/*
+			bike.assembler = ["Assembler: ", $("assembler").value];
+		    bike.date = ["Date: ", $("assdate").value];
+		    bike.type = ["Type: ", $("biketype").value];
+		    bike.marked = ["Marked: ", markedVal];
+		    bike.time = ["Time: ", $("asstime").value];
+		    bike.comments = ["Comments: ", $("comments").value];
+*/
+
 		
 	}
 	/*
@@ -230,7 +266,7 @@ function removeBike (k) {
 	var clearData = $('clear');
 	clearData.addEventListener("click", dumpLocal);
 	var save = $('submit');
-	save.addEventListener("click", storeData);
+	save.addEventListener("click", checkBike);
 	
 
 
