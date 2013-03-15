@@ -87,13 +87,11 @@ window.addEventListener("DOMContentLoaded", function () {
 		var makeDiv = document.createElement("div");
 		makeDiv.setAttribute("id", "bikes");
 		var makeList = document.createElement("ul");
-		/* makeList.setAttribute("class", "dd"); *///not used...
 		makeDiv.appendChild(makeList);
 		document.body.appendChild(makeDiv);
 		$("bikes").style.display = "block";
 		for(var i=0, j=localStorage.length; i<j; i++){
 	       var makeLi = document.createElement("li");
-	       var linksLi = document.createElement("li");
 	       if (i%2 === 0) {
 	           makeLi.setAttribute("class", "altcolor");
 	       }
@@ -103,39 +101,39 @@ window.addEventListener("DOMContentLoaded", function () {
 	       var item = JSON.parse(useless);
 	       var makeNextList = document.createElement("ul");
 	       makeLi.appendChild(makeNextList);
+	      
 	       for(var k in item){
 	           var makeNextLi = document.createElement("li");
 	           makeNextList.appendChild(makeNextLi);
 	           makeNextLi.innerHTML = "<b>"+item[k][0]+"</b> "+item[k][1];
-	           makeNextList.appendChild(linksLi);
+	         
 	       }
-	       /* makeItemControls(); */
-	       
-	       
-	       /* this was the second part of my remove item by key
-	       it just added an X to the bottom right, that was clickable and removed that item from the storage.
-	       
-	       var delLi = document.createElement("li");
-	       delLi.setAttribute("id", key);
-	       delLi.setAttribute("class", "deleteli");
-	       delLi.innerHTML = "X";
-	       var aEL = delLi;
-	       aEL.addEventListener("click", removeBike(key));
-	       makeNextList.appendChild(delLi);
-	       */
-	       
-	       
-        }
+	        var linksLi = document.createElement("li");
+	         makeNextList.appendChild(linksLi);
+	       makeItemControls(key, linksLi);
+	    }
 		switchView("1");
 		
 		
 	}
 	// Creates links for edit/delete items
-	function makeItemControls () {
-		var eLink = documtent.createElement("a");
+	function makeItemControls (key, linksLi) {
+		var eLink = document.createElement("a");
+		eLink.href = "#";
+		eLink.key = key;
+		var eText = "Edit Contact";
+		eLink.addEventListener("click", editItem);
+		eLink.innerHTML = eText; //not sure why we are using a variable here, seems redundant and adds one extra line of code
+		linksLi.appendChild(eLink);
 		
 		
-		
+		var dLink = document.createElement("a");
+		dLink.href = "#";
+		dLink.key = key;
+		var dText = "Delete Contact";
+		dLink.addEventListener("click", deleteItem);
+		dLink.innerHTML = dText;
+	    linksLi.appendChild(dLink);
 	}
 	
 	//add to local storage
@@ -156,15 +154,40 @@ window.addEventListener("DOMContentLoaded", function () {
 		localStorage.setItem(uid, JSON.stringify(bike));
 		resetForm ();		
 	}
-	/*
-	remove item by key - not needed for this project but wanted to see if i could figure it out.
-	i did figure it out partially, but it was causing an issue with items not diplaying correctly 
-	so i just didn't use it	also as a side note, it seems kind of like a halfassed method of 
-	getting this done and i'm sure there has to be a more efficient way
+
+	//edit item
+	function editItem () {
+		var value = localStorage.getItem(this.key);
+		var bike = JSON.parse(value);
+		
+		switchView("0");
+		
+		$("assembler").value = bike.assembler[1];
+		$("assdate").value = bike.date[1];
+		$("biketype").value = bike.type[1];
+		$("asstime").value = bike.time[1];
+		$("comments").value = bike.comments[1];
+		//$("assembler").value = 
+		var marked = document.forms[0].bmarked;
+		for (i=0;i<marked.length; i++){
+			if (marked[i].value == "yes" && bike.marked == "yes"){
+				
+				
+			} else if (marked[i].value == "no" && bike.marked == "no"){
+				
+				
+			}
+			
+		}
+	}
 	
-	just to clarify, i was trying to remove it from the storage(which works perfectly) and also
-	remove the visual data from the ul tag by having a clickable X on the item.
-	*/
+	//delete item
+	function deleteItem () {
+		
+		console.log("test");
+		
+	}
+	
 	function removeBike (k) {
 		
 		localStorage.removeItem(k);
@@ -174,7 +197,7 @@ window.addEventListener("DOMContentLoaded", function () {
 	// variables & run functions
 	
 	/* i'm not really sure why we are doing the select portion dynamically, as if changes needed to be made
-	it would be just as simple to change the html file and if the  javascript is done right there should be no need
+	it would be just as simple to change the html file and if the javascript is done right, there should be no need
 	for extra coding to use the new option tag. */
 	var bikeTypes = [
 			"--Select Bike Type--",
