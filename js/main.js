@@ -167,18 +167,24 @@ window.addEventListener("DOMContentLoaded", function () {
 		$("biketype").value = bike.type[1];
 		$("asstime").value = bike.time[1];
 		$("comments").value = bike.comments[1];
-		//$("assembler").value = 
 		var marked = document.forms[0].bmarked;
+		
+		// note to self: i don't think this is working the way it should be...come back to this
 		for (i=0;i<marked.length; i++){
-			if (marked[i].value == "yes" && bike.marked == "yes"){
+			if (marked[i].value == "yes" && bike.marked[1] == "yes"){
+				marked[i].setAttribute("checked", "checked");
 				
+			} else if (marked[i].value == "no" && bike.marked[1] == "no"){
 				
-			} else if (marked[i].value == "no" && bike.marked == "no"){
-				
-				
+				marked[i].setAttribute("checked", "checked");
 			}
 			
 		}
+		save.removeEventListener("click", storeData);
+		$("submit").value = "Edit Bike";
+		var eSubmit = $("submit");
+		eSubmit.addEventListener("click", checkBike);
+		
 	}
 	
 	//delete item
@@ -188,12 +194,20 @@ window.addEventListener("DOMContentLoaded", function () {
 		
 	}
 	
-	function removeBike (k) {
+	
+	function checkBike () {
+		
+		
+		
+	}
+	/*
+function removeBike (k) {
 		
 		localStorage.removeItem(k);
 		var liPoof = document.getElementById(k);
 		liPoof.parentNode.removeChild(liPoof);
 	}
+*/
 	// variables & run functions
 	
 	/* i'm not really sure why we are doing the select portion dynamically, as if changes needed to be made
