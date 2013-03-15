@@ -74,6 +74,7 @@ window.addEventListener("DOMContentLoaded", function () {
 	function dumpLocal () {
 		localStorage.clear();
 		alert('Bike list cleared');
+		window.location.reload();
 	}
 
 	//displaydata
@@ -196,7 +197,15 @@ window.addEventListener("DOMContentLoaded", function () {
 	
 	//delete item
 	function deleteItem () {
+		var delPrompt = confirm("Are you sure you would like to remove this entry?");
 		
+		if (delPrompt){
+			localStorage.removeItem(this.key);
+			alert("Entry was deleted!");
+			window.location.reload();
+		} else {
+			alert("Entry was not deleted!");
+		}
 				
 	}
 	
