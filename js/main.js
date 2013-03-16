@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		theli.appendChild(theselect);
 				
 	}
-	/* having issues with my item display div creating a second div with the same id... */
+	/* having issues with my item display div creating a second div with the same id. this fixes that */
 	function remDiv () {
 		var xBikeDiv = $("bikes");
 		xBikeDiv.parentNode.removeChild(xBikeDiv);
@@ -190,20 +190,16 @@ window.addEventListener("DOMContentLoaded", function () {
 		$("asstime").value = bike.time[1];
 		$("asstext").innerHTML = bike.time[1];
 		$("comments").value = bike.comments[1];
-		var marked = document.forms[0].bmarked;
+		var marked = document.getElementsByName("bmarked");
 		
-		// not sure why but when i edit more than one item, the value retains the value from the previous one
-		console.log(bike.marked);
-		for (i-0;i<marked.length;i++){
-			marked[i].setAttribute("checked", "unchecked");
-		}
 		for (i=0;i<marked.length; i++){
 			if (marked[i].value === "yes" && bike.marked[1] === "yes"){
-				marked[i].setAttribute("checked", "checked");
+				/* marked[i].setAttribute("checked", "checked"); *///was giving me problems
+				marked[i].checked = true;
 				console.log(bike.marked + " - " + marked[i].value);
 			} else if (marked[i].value === "no" && bike.marked[1] === "no"){
-				
-				marked[i].setAttribute("checked", "checked");
+				marked[i].checked = true;
+				/* marked[i].setAttribute("checked", "checked"); */
 				console.log(bike.marked + " - " + marked[i].value);
 			}
 			
