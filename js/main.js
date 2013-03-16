@@ -193,13 +193,18 @@ window.addEventListener("DOMContentLoaded", function () {
 		var marked = document.forms[0].bmarked;
 		
 		// not sure why but when i edit more than one item, the value retains the value from the previous one
+		console.log(bike.marked);
+		for (i-0;i<marked.length;i++){
+			marked[i].setAttribute("checked", "unchecked");
+		}
 		for (i=0;i<marked.length; i++){
 			if (marked[i].value === "yes" && bike.marked[1] === "yes"){
 				marked[i].setAttribute("checked", "checked");
-				
+				console.log(bike.marked + " - " + marked[i].value);
 			} else if (marked[i].value === "no" && bike.marked[1] === "no"){
 				
 				marked[i].setAttribute("checked", "checked");
+				console.log(bike.marked + " - " + marked[i].value);
 			}
 			
 		}
