@@ -39,6 +39,13 @@ window.addEventListener("DOMContentLoaded", function () {
 		theli.appendChild(theselect);
 				
 	}
+	/* having issues with my item display div creating a second div with the same id... */
+	function remDiv () {
+		var xBikeDiv = $("bikes");
+		xBikeDiv.parentNode.removeChild(xBikeDiv);
+		
+		
+	}
 	// hides/shows display div
 	function switchView (x) {
 		switch(x){
@@ -47,8 +54,7 @@ window.addEventListener("DOMContentLoaded", function () {
 				$("clear").style.display = "inline";
 				$("displayLink").style.display = "inline";
 				$("ab").style.display = "none";
-				$("bikes").style.display = "none";
-                break;
+			    break;
 			case "1": //form hidden
 				$("addbike").style.display = "none";
 				$("clear").style.display = "inline";
@@ -79,6 +85,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
 	//displaydata
 	function showData () {
+		//was having multiple of the list showing up, this deletes the div if it exists
+		if ($("bikes")){
+			remDiv();
+		}
 		if (localStorage.length<1) {
 			$("ab").innerHTML = "Add bike";
 		} else {
@@ -143,13 +153,13 @@ window.addEventListener("DOMContentLoaded", function () {
 		/* i have never been one to use a random number for a key without having a letter or something
 		 at the front, which is why my key starts with a k. personal preference maybe, not sure but it 
 		 makes more sense to me */
-		 
+		 var newbike;
 		if ($("submit").value == "Submit bike"){
 		var uid = "k" + Math.floor(Math.random()*123456);
-		
+		newbike = true;
 		} else {
 			uid = key;
-			console.log(uid);
+			newbike = false;
 		}
 		var bike = {};
 		    bike.assembler = ["Assembler: ", $("assembler").value];
@@ -158,9 +168,12 @@ window.addEventListener("DOMContentLoaded", function () {
 		    bike.marked = ["Marked: ", markedVal];
 		    bike.time = ["Time: ", $("asstime").value];
 		    bike.comments = ["Comments: ", $("comments").value];
-		    
+		    markedVal = ""
 		localStorage.setItem(uid, JSON.stringify(bike));
-		resetForm ();		
+		resetForm ();
+				if (newbike === false) {
+					showData();
+				}
 	}
 
 	//edit item
@@ -168,31 +181,35 @@ window.addEventListener("DOMContentLoaded", function () {
 		var value = localStorage.getItem(this.key);
 		var bike = JSON.parse(value);
 		
+
 		switchView("0");
-		
+				
 		$("assembler").value = bike.assembler[1];
 		$("assdate").value = bike.date[1];
 		$("biketype").value = bike.type[1];
 		$("asstime").value = bike.time[1];
+		$("asstext").innerHTML = bike.time[1];
 		$("comments").value = bike.comments[1];
 		var marked = document.forms[0].bmarked;
 		
-		// note to self: i don't think this is working the way it should be...come back to this
+		// not sure why but when i edit more than one item, the value retains the value from the previous one
 		for (i=0;i<marked.length; i++){
-			if (marked[i].value == "yes" && bike.marked[1] == "yes"){
+			if (marked[i].value === "yes" && bike.marked[1] === "yes"){
 				marked[i].setAttribute("checked", "checked");
 				
-			} else if (marked[i].value == "no" && bike.marked[1] == "no"){
+			} else if (marked[i].value === "no" && bike.marked[1] === "no"){
 				
 				marked[i].setAttribute("checked", "checked");
 			}
 			
 		}
-		save.removeEventListener("click", storeData);
+		
+		save.removeEventListener("click", checkBike);
 		$("submit").value = "Edit Bike";
 		var eSubmit = $("submit");
 		eSubmit.addEventListener("click", checkBike);
 		eSubmit.key = this.key;
+
 	}
 	
 	//delete item
@@ -254,7 +271,6 @@ window.addEventListener("DOMContentLoaded", function () {
 			e.preventDefault();
 			return false;
 		} else {
-			$("bikes").innerHTML = "";
 			storeData(this.key);
 		}
 		

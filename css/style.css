@@ -8,10 +8,13 @@ Project 3
 
 
 a {
-	color: #d637d6;	
+	color: #8c428c;	
 }
 
-
+.test{
+	-webkit-transform: rotate(-90deg); 
+-moz-transform: rotate(-90deg);	
+}
 p {
 	color: gray;
 	
@@ -76,6 +79,9 @@ li.deleteli {
 	text-align: right;
 }
 
+div.req {
+	color: #111111;
+}
 
 ul#errors {
 	color: red;
