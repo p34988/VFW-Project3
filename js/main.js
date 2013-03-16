@@ -6,23 +6,22 @@
 
 window.addEventListener("DOMContentLoaded", function () {
 
-
-
 	// get element function
 	function $ (x) {
 		var element = document.getElementById(x);
 		return element;
 	}
+	
 	//get the checked state for radios
 	function getMarked () {
 		var marked = document.getElementsByName("bmarked");
 		for (i=0, j=marked.length; i<j; i++) {
 			if(marked[i].checked) {
 				markedVal = marked[i].value;
-			
 			}
 		}
 	}
+	
 	//populate create and populate a select tag
 	function popType () {
 		var theform = $("addbike");
@@ -37,15 +36,13 @@ window.addEventListener("DOMContentLoaded", function () {
 			theselect.appendChild(bikeOption);
 		}		
 		theli.appendChild(theselect);
-				
 	}
 	/* having issues with my item display div creating a second div with the same id. this fixes that */
 	function remDiv () {
 		var xBikeDiv = $("bikes");
-		xBikeDiv.parentNode.removeChild(xBikeDiv);
-		
-		
+		xBikeDiv.parentNode.removeChild(xBikeDiv);		
 	}
+	
 	// hides/shows display div
 	function switchView (x) {
 		switch(x){
@@ -70,12 +67,9 @@ window.addEventListener("DOMContentLoaded", function () {
 		$("asstime").value = "1";
 		$("asstext").innerHTML = "1";
 		$("comments").value = "";
-		$("biketype").selectedIndex = "0";
-	
-		
+		$("biketype").selectedIndex = "0";	
 	}
 	
-
 	//clear local storage
 	function dumpLocal () {
 		localStorage.clear();
@@ -104,7 +98,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		for(var i=0, j=localStorage.length; i<j; i++){
 	       var makeLi = document.createElement("li");
 	       if (i%2 === 0) {
-	           makeLi.setAttribute("class", "altcolor");
+		       makeLi.setAttribute("class", "altcolor");
 	       } 
 	       makeList.appendChild(makeLi);
 	       var key = localStorage.key(i);
@@ -112,16 +106,14 @@ window.addEventListener("DOMContentLoaded", function () {
 	       var item = JSON.parse(useless);
 	       var makeNextList = document.createElement("ul");
 	       makeLi.appendChild(makeNextList);
-	      
 	       for(var k in item){
 	           var makeNextLi = document.createElement("li");
 	           makeNextList.appendChild(makeNextLi);
 	           makeNextLi.innerHTML = "<b>"+item[k][0]+"</b> "+item[k][1];
-	         
 	       }
-	        var linksLi = document.createElement("li");
-	        makeNextList.appendChild(linksLi);
-	        makeItemControls(key, linksLi);
+	       var linksLi = document.createElement("li");
+	       makeNextList.appendChild(linksLi);
+	       makeItemControls(key, linksLi);
 	    }
 		switchView("1");
 		
@@ -132,15 +124,15 @@ window.addEventListener("DOMContentLoaded", function () {
 		var eLink = document.createElement("a");
 		eLink.href = "#";
 		eLink.key = key;
+		eLink.setAttribute("class", "button");
 		var eText = "Edit Contact";
 		eLink.addEventListener("click", editItem);
 		eLink.innerHTML = eText; //not sure why we are using a variable here, seems redundant and adds one extra line of code
 		linksLi.appendChild(eLink);
-		
-		
 		var dLink = document.createElement("a");
 		dLink.href = "#";
 		dLink.key = key;
+		dLink.setAttribute("class", "button");
 		var dText = "Delete Contact";
 		dLink.addEventListener("click", deleteItem);
 		dLink.innerHTML = dText;
@@ -153,7 +145,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		/* i have never been one to use a random number for a key without having a letter or something
 		 at the front, which is why my key starts with a k. personal preference maybe, not sure but it 
 		 makes more sense to me */
-		 var newbike;
+		var newbike;
 		if ($("submit").value == "Submit bike"){
 		var uid = "k" + Math.floor(Math.random()*123456);
 		newbike = true;
@@ -162,28 +154,25 @@ window.addEventListener("DOMContentLoaded", function () {
 			newbike = false;
 		}
 		var bike = {};
-		    bike.assembler = ["Assembler: ", $("assembler").value];
-		    bike.date = ["Date: ", $("assdate").value];
-		    bike.type = ["Type: ", $("biketype").value];
-		    bike.marked = ["Marked: ", markedVal];
-		    bike.time = ["Time: ", $("asstime").value];
-		    bike.comments = ["Comments: ", $("comments").value];
-		    markedVal = ""
+	    bike.assembler = ["Assembler: ", $("assembler").value];
+	    bike.date = ["Date: ", $("assdate").value];
+	    bike.type = ["Type: ", $("biketype").value];
+	    bike.marked = ["Marked: ", markedVal];
+	    bike.time = ["Time: ", $("asstime").value];
+	    bike.comments = ["Comments: ", $("comments").value];
+	    markedVal = ""
 		localStorage.setItem(uid, JSON.stringify(bike));
 		resetForm ();
-				if (newbike === false) {
-					showData();
-				}
+		if (newbike === false) {
+			showData();
+		}
 	}
 
 	//edit item
 	function editItem () {
 		var value = localStorage.getItem(this.key);
 		var bike = JSON.parse(value);
-		
-
 		switchView("0");
-				
 		$("assembler").value = bike.assembler[1];
 		$("assdate").value = bike.date[1];
 		$("biketype").value = bike.type[1];
@@ -191,7 +180,6 @@ window.addEventListener("DOMContentLoaded", function () {
 		$("asstext").innerHTML = bike.time[1];
 		$("comments").value = bike.comments[1];
 		var marked = document.getElementsByName("bmarked");
-		
 		for (i=0;i<marked.length; i++){
 			if (marked[i].value === "yes" && bike.marked[1] === "yes"){
 				/* marked[i].setAttribute("checked", "checked"); *///was giving me problems
@@ -226,7 +214,6 @@ window.addEventListener("DOMContentLoaded", function () {
 		}
 				
 	}
-	
 	
 	function checkBike (e) {
 	
@@ -302,10 +289,4 @@ window.addEventListener("DOMContentLoaded", function () {
 	var save = $('submit');
 	save.addEventListener("click", checkBike);
 	
-
-
-
-
-
-
 });

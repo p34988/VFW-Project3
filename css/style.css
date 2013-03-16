@@ -5,44 +5,38 @@ Project 3
 */
 /** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
 
-
-
-a {
-	color: #8c428c;	
+a.button {
+   border-top: 1px solid #7b7b7b;
+   background: #4e4e4e;
+   padding: 3px 15px 3px 10px;
+   border-radius: 50px 21px;
+   color: #000000;
+   font-size: 16px;
+   text-decoration: none;
+   vertical-align: middle;
+}
+a.button2 {
+   border-top: 1px solid #5d6f7c;
+   background: #445058;
+   padding: 3px 15px 3px 10px;
+   border-radius: 50px 21px;
+   color: #000000;
+   font-size: 16px;
+   text-decoration: none;
+   vertical-align: middle;
 }
 
-.test{
-	-webkit-transform: rotate(-90deg); 
--moz-transform: rotate(-90deg);	
-}
-p {
-	color: gray;
-	
-}
-
-h1 {
-	 background-color: #ccc;
-	 border-bottom: 1px solid #666;
-	 color: #222;
-	 display: block;
-	 font-size: 20px;
-	 font-weight: bold;
-	 padding: 10px 0px;
-	 margin:0px 0px 5px 0px;
-	 color:#666;
-	 font-weight: bold;
-	 text-align: center;
-
-}
-
-legend {
-	color: #aea609;
-	margin-left: 5px;
-}
-
-fieldset.bikefield {
-	margin-top: 5px;	
-	
+a.button3 {
+   border-top: 1px solid #5d6f7c;
+   background: #445058;
+   padding: 3px 15px 3px 10px;
+   border-radius: 50px 21px;
+   color: #000000;
+   font-size: 16px;
+   text-decoration: none;
+   vertical-align: middle;
+   text-align: center;
+  /*  margin-left: 5px; */
 }
 
 body {
@@ -51,12 +45,63 @@ body {
 	font-family: Tahoma;
 }
 
+div.req {
+	-webkit-text-stroke: .5px #386600;
+	color: #7de200;
+}
+
+fieldset.bikefield {
+	margin-top: 5px;	
+	
+}
+
+
+h1 {
+	 background-color: #4178a7;
+	 border-bottom: 1px solid #003563;
+	 color: #dedede;
+	 display: block;
+	 font-size: 20px;
+	 font-weight: bold;
+	 padding: 10px 0px;
+	 margin:0px 0px 5px 0px;
+	 font-weight: bold;
+	 text-align: center;
+
+}
 
 input, select, textarea{
 	
 	background-color: #777;
-	border: 1px #000000 solid; 
+	border: 1px #626262 solid; 
 	font-size: 11px; 
+	width: 95%;
+}
+input#asstime {
+	width: 75%;
+}
+input#submit {
+	margin-left: 5px;
+}
+
+input#marked {
+	width:	50px;
+}
+
+legend {
+	-webkit-text-stroke: .5px #5a8cff;
+	color: #334d89;
+	margin-left: 5px;
+}
+
+p {
+	color: #0085ff;
+	text-align: center;
+}
+
+label {
+	font-weight: bold;
+	color: #909090;	
 }
 
 label#asstext {
@@ -79,10 +124,28 @@ li.deleteli {
 	text-align: right;
 }
 
-div.req {
-	color: #111111;
+li.marked {
+	display: inline;
 }
 
 ul#errors {
 	color: red;
 }
+
+
+#bikes {
+	
+	margin-top: 20px;
+}
+
+#clear, #displayLink, #ab {
+	
+	position: relative; 
+    top: 7px;
+    left: 5px;
+}
+ #submit {
+	 padding: 10px 0px;
+	 margin-bottom: 5px;
+	
+ }

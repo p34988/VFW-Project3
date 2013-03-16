@@ -36,8 +36,8 @@
 					</li>
 					<li><label for="marked"><b>Marked:</b></label><br />
 						<ul>
-			        		<li><label for="marked">Yes</label><input type="radio" name="bmarked" id="marked" value="yes" /></li>
-			        		<li><label for="marked">No</label><input type="radio" checked name="bmarked" id="marked" value="no" /></li>
+			        		<li class="marked"><label for="marked">Yes</label><input type="radio" name="bmarked" id="marked" value="yes" /></li>
+			        		<li class="marked"><label for="marked">No</label><input type="radio" checked name="bmarked" id="marked" value="no" /></li>
 		        		</ul><br />
 		        	</li>
 					<li><label  for="asstime"><b>Assembly time(<i>in minutes</i>):</b></label><br />
@@ -50,14 +50,15 @@
 				</ul>
 		<!--submit button-->
 				<input type="button" id="submit" value="Submit bike"  /><br />
-				<input type="hidden" id="versteckt" value="i hate git"/>
+				<input type="hidden" id="versteckt" value="i hate git"/><!-- <br /> -->
 			</fieldset>
 		</form>
 		<!-- data links-->
-		<a href="#" id="clear">Clear Stored Data</a>
-		<a href="#" id="displayLink">Display Data</a>
+		<a href="#" id="clear" class="button2">Clear Stored Data</a>
+		<a href="#" id="displayLink" class="button2">Display Data</a>
+		
 		<!-- i added the link back to this page just to easily reset form, but did a manual reset also, elsewhere -->
-		<a href="additem.html"id="ab" style="display:none;"></a>
+		<a href="additem.html"id="ab" style="display:none;" class="button2"></a><br />
 		<script src="js/main.js" type="text/javascript"></script>
 	</body>
 </html>
