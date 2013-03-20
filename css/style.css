@@ -18,7 +18,7 @@ a.button {
 }
 a.button2 {
    border-top: 1px solid #5d6f7c;
-   background: #445058;
+   background: #009aff;
    padding: 3px 15px 3px 10px;
    border-radius: 50px 21px;
    color: #000000;
@@ -29,7 +29,7 @@ a.button2 {
 
 a.button3 {
    border-top: 1px solid #5d6f7c;
-   background: #445058;
+   background: #009aff;
    padding: 3px 15px 3px 10px;
    border-radius: 50px 21px;
    color: #000000;
@@ -76,11 +76,13 @@ input, select, textarea{
 
 input#asstime {
 	width: 75%;
+	margin-left: 15px; /* tested it on my Galaxy SIII and with the case, it is hard to get 
+						to numbers lower than 30. Moving it away from the edge a bit */
 }
 
 input#submit {
 	margin-left: 5px;
-	background: #009aff;
+	background: #ecec00;
 	border-radius: 50px 21px;
 	font-weight: bold;
 }
@@ -106,7 +108,7 @@ label {
 }
 
 label#asstext {
-	margin-left:2em;
+	margin-left: 1.5em; /* bumps the range value label away from the slider */
 }
 
 li {

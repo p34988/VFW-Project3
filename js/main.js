@@ -57,6 +57,7 @@ window.addEventListener("DOMContentLoaded", function () {
 				$("clear").style.display = "inline";
 				$("displayLink").style.display = "none";
 				$("ab").style.display = "inline";
+				$("h1").innerHTML = "List of bikes";
 				break;
 		}
 	}
@@ -64,17 +65,24 @@ window.addEventListener("DOMContentLoaded", function () {
 	function resetForm () {
 		$("assembler").value = "";
 		$("assdate").value = "";
-		$("asstime").value = "1";
+		/* $("asstime").value = "1"; */
+		grabDate();
 		$("asstext").innerHTML = "1";
 		$("comments").value = "";
-		$("biketype").selectedIndex = "0";	
+		$("biketype").selectedIndex = "0";
+		$("h1").innerHTML = "Add a bike";	
 	}
 	
 	//clear local storage
 	function dumpLocal () {
-		localStorage.clear();
-		alert('Bike list cleared');
-		window.location.reload();
+		var cPrompt = confirm("Are you sure you would like to clear all entries?");
+		if (cPrompt){
+			localStorage.clear();
+			alert('Bike list cleared!');
+			window.location.reload();
+		} else {
+			alert("Entries were not cleared!");
+		}
 	}
 
 	//displaydata
@@ -85,6 +93,11 @@ window.addEventListener("DOMContentLoaded", function () {
 		}
 		if (localStorage.length<1) {
 			$("ab").innerHTML = "Add bike";
+			alert("No bike entries to display. Add a bike!!");
+			return;
+			/* this would be a really good spot for a box that informs the user that the displaylist is empty.
+			no one likes obnoxious alerts that pop up, so adding a box when its empty would be better.
+			i might add it later if i have time. */
 		} else {
 			
 			$("ab").innerHTML = "Add another bike";
@@ -195,6 +208,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		
 		save.removeEventListener("click", checkBike);
 		$("submit").value = "Edit Bike";
+		$("h1").innerHTML = "Edit Bike";
 		var eSubmit = $("submit");
 		eSubmit.addEventListener("click", checkBike);
 		eSubmit.key = this.key;
