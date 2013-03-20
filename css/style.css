@@ -14,6 +14,7 @@ a.button {
    font-size: 16px;
    text-decoration: none;
    vertical-align: middle;
+   margin-right: 5px;
 }
 a.button2 {
    border-top: 1px solid #5d6f7c;
@@ -36,7 +37,6 @@ a.button3 {
    text-decoration: none;
    vertical-align: middle;
    text-align: center;
-  /*  margin-left: 5px; */
 }
 
 body {
@@ -52,36 +52,37 @@ div.req {
 
 fieldset.bikefield {
 	margin-top: 5px;	
-	
 }
 
-
 h1 {
-	 background-color: #4178a7;
-	 border-bottom: 1px solid #003563;
-	 color: #dedede;
-	 display: block;
-	 font-size: 20px;
-	 font-weight: bold;
-	 padding: 10px 0px;
-	 margin:0px 0px 5px 0px;
-	 font-weight: bold;
-	 text-align: center;
-
+	background-color: #4178a7;
+	border-bottom: 1px solid #003563;
+	color: #dedede;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px 0px;
+	margin:0px 0px 5px 0px;
+	font-weight: bold;
+	text-align: center;
 }
 
 input, select, textarea{
-	
 	background-color: #777;
 	border: 1px #626262 solid; 
 	font-size: 11px; 
 	width: 95%;
 }
+
 input#asstime {
 	width: 75%;
 }
+
 input#submit {
 	margin-left: 5px;
+	background: #009aff;
+	border-radius: 50px 21px;
+	font-weight: bold;
 }
 
 input#marked {
@@ -112,6 +113,7 @@ li {
 	padding: 5px;
 	list-style: none;
 }
+
 li.altcolor {
 	border-bottom: 3px;
 	border-bottom-color: black;
@@ -132,20 +134,17 @@ ul#errors {
 	color: red;
 }
 
-
 #bikes {
-	
 	margin-top: 20px;
 }
 
 #clear, #displayLink, #ab {
-	
 	position: relative; 
     top: 7px;
     left: 5px;
 }
- #submit {
-	 padding: 10px 0px;
-	 margin-bottom: 5px;
-	
- }
+
+#submit {
+	padding: 10px 0px;
+	margin-bottom: 5px;
+}

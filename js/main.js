@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		eLink.href = "#";
 		eLink.key = key;
 		eLink.setAttribute("class", "button");
-		var eText = "Edit Contact";
+		var eText = "Edit Bike";
 		eLink.addEventListener("click", editItem);
 		eLink.innerHTML = eText; //not sure why we are using a variable here, seems redundant and adds one extra line of code
 		linksLi.appendChild(eLink);
@@ -133,7 +133,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		dLink.href = "#";
 		dLink.key = key;
 		dLink.setAttribute("class", "button");
-		var dText = "Delete Contact";
+		var dText = "Delete Bike";
 		dLink.addEventListener("click", deleteItem);
 		dLink.innerHTML = dText;
 	    linksLi.appendChild(dLink);
